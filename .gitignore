@@ -28,4 +28,5 @@ logs/
 Thumbs.db
 desktop.ini
 
+### 个人 SQL 文件 ###
 Query.sql
