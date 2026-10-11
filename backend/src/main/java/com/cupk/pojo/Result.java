@@ -19,17 +19,17 @@ public class Result {
 
     public static Result success(Object object) {
         Result result = new Result();
-        result.data = object;
         result.code = 1;
         result.msg = "success";
+        result.data = object;
         return result;
     }
 
 
     public static Result error(String msg) {
         Result result = new Result();
-        result.msg = msg;
         result.code = 0;
+        result.msg = msg;
         return result;
     }
 }
