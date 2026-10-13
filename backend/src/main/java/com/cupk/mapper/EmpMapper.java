@@ -1,6 +1,7 @@
 package com.cupk.mapper;
 
 import com.cupk.pojo.Emp;
+import com.cupk.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,6 +24,12 @@ public interface EmpMapper {
 //    public List<Emp> list(Integer start, Integer pageSize);
 
     //--------------------PageHelper分页方法--------------------//
-    @Select("select e.*, d.name deptName from emp e left join dept d on e.dept_id = d.id order by e.update_time desc")
-    public List<Emp> list();
+    //@Select("select e.*, d.name deptName from emp e left join dept d on e.dept_id = d.id order by e.update_time desc")
+
+    /**
+     * 根据查询条件分页查询员工列表
+     * @param empQueryParam
+     * @return
+     */
+    public List<Emp> list(EmpQueryParam empQueryParam);
 }

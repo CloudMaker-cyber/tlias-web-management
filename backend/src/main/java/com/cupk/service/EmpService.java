@@ -1,7 +1,10 @@
 package com.cupk.service;
 
 import com.cupk.pojo.Emp;
+import com.cupk.pojo.EmpQueryParam;
 import com.cupk.pojo.PageResult;
+
+import java.time.LocalDate;
 
 public interface EmpService {
     /**
@@ -11,5 +14,5 @@ public interface EmpService {
      * @param pageSize
      *
      */
-    PageResult<Emp> page(Integer page, Integer pageSize);
+    PageResult<Emp> page(EmpQueryParam empQueryParam);
 }
