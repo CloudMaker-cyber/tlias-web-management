@@ -3,11 +3,13 @@ package com.cupk.controller;
 import com.cupk.pojo.Dept;
 import com.cupk.pojo.Result;
 import com.cupk.service.DeptService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RequestMapping("/depts")
 @RestController
 public class DeptController {
@@ -17,7 +19,8 @@ public class DeptController {
 
     @GetMapping
     public Result list() {
-        System.out.println("查询所有部门");
+        //System.out.println("查询所有部门");
+        log.info("查询所有部门");
         List<Dept> deptList = deptService.findAll();
         return Result.success(deptList);
     }
@@ -25,7 +28,8 @@ public class DeptController {
     //根据id删除部门
     @DeleteMapping
     public Result delete(Integer id) {
-        System.out.println("根据id删除部门");
+        //System.out.println("根据id删除部门"+id);
+        log.info("根据id删除部门{}",id);
         deptService.deleteById(id);
         return Result.success();
     }
@@ -33,7 +37,8 @@ public class DeptController {
     //新增部门
     @PostMapping
     public Result add(@RequestBody Dept dept) {//接收前端传递的json数据，并封装到Dept对象中
-        System.out.println("新增部门"+dept);
+        //System.out.println("新增部门"+dept);
+        log.info("新增部门{}",dept);
         deptService.add(dept);
         return Result.success();
     }
@@ -41,7 +46,8 @@ public class DeptController {
     //根据id查询部门
     @GetMapping("/{id}")
     public Result getById(@PathVariable Integer id) {
-        System.out.println("根据id查询部门"+id);
+        //System.out.println("根据id查询部门"+id);
+        log.info("根据id查询部门{}",id);
         Dept dept = deptService.getById(id);
         return Result.success(dept);
     }
@@ -49,7 +55,8 @@ public class DeptController {
     //修改部门
     @PutMapping
     public Result update(@RequestBody Dept dept) {
-        System.out.println("修改部门"+dept);
+        //System.out.println("修改部门"+dept);
+        log.info("修改部门{}",dept);
         deptService.update(dept);
         return Result.success();
     }
