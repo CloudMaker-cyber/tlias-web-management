@@ -2,7 +2,9 @@ package com.cupk.mapper;
 
 import com.cupk.pojo.Emp;
 import com.cupk.pojo.EmpQueryParam;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -32,4 +34,13 @@ public interface EmpMapper {
      * @return
      */
     public List<Emp> list(EmpQueryParam empQueryParam);
+
+    /**
+     * 插入员工信息
+     * @param emp
+     */
+    @Options(useGeneratedKeys = true, keyProperty = "id")//获取插入数据的自增主键---MyBatis主键返回。insert方法调用后，emp对象的id属性会自动赋值。
+    @Insert("insert into emp (username, name, gender, phone,job,salary,image,entry_date,dept_id,create_time, update_time) " +
+            "values (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
+    void insert(Emp emp);
 }

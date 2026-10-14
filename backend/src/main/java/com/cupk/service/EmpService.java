@@ -9,10 +9,11 @@ import java.time.LocalDate;
 public interface EmpService {
     /**
      * 分页查询员工信息
-     *
-     * @param page
-     * @param pageSize
-     *
      */
     PageResult<Emp> page(EmpQueryParam empQueryParam);
+
+    /**
+     * 添加员工信息
+     */
+    void save(Emp emp);
 }
