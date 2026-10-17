@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -76,6 +77,40 @@ public class EmpServiceImpl implements EmpService {
             //记录日志
             EmpLog empLog = new EmpLog(null,LocalDateTime.now(), "新增员工" + emp.getName());
             empLogService.insertLog(empLog);
+        }
+
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(List<Integer> ids) {
+        //1。调用mapper接口批量删除员工基本信息
+        empMapper.deleteByIds(ids);
+        //2。调用mapper接口批量删除员工工作经历信息
+        empExprMapper.deleteByEmpIds(ids);
+        //3。记录日志
+//        EmpLog empLog = new EmpLog(null,LocalDateTime.now(), "删除员工" + ids);
+//        empLogService.insertLog(empLog);
+    }
+
+    @Override
+    public Emp getInfo(Integer id) {
+       return empMapper.getById(id);
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void update(Emp emp) {
+        //1.更新员工基本信息
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+        //2.删除员工旧有工作经历信息
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+        //3.根据id添加员工新工作经历信息
+        List<EmpExpr> exprList = emp.getExprList();
+        if (!CollectionUtils.isEmpty(exprList)) {
+            exprList.forEach(expr -> expr.setEmpId(emp.getId()));//为每段工作经历补充empId
+            empExprMapper.insertBatch(exprList);
         }
 
     }

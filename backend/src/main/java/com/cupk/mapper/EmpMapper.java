@@ -43,4 +43,20 @@ public interface EmpMapper {
     @Insert("insert into emp (username, name, gender, phone,job,salary,image,entry_date,dept_id,create_time, update_time) " +
             "values (#{username}, #{name}, #{gender}, #{phone}, #{job}, #{salary}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})")
     void insert(Emp emp);
+
+    /**
+     * 根据id 批量删除员工信息
+     * 动态SQL，在EmpMapper.xml映射文件中实现
+     */
+    void deleteByIds(List<Integer> ids);
+
+    /**
+     * 根据id查询员工信息及工作经历信息
+     */
+    Emp getById(Integer id);
+
+    /**
+     * 根据id更新员工信息
+     */
+    void updateById(Emp emp);
 }
