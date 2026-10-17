@@ -4,6 +4,7 @@ import com.cupk.pojo.Emp;
 import com.cupk.pojo.EmpQueryParam;
 import com.cupk.pojo.PageResult;
 import com.cupk.pojo.Result;
+import com.cupk.service.EmpService;
 import com.cupk.service.impl.EmpServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.List;
 public class EmpController {
 
     @Autowired
-    private EmpServiceImpl empService;
+    private EmpService empService;
     /**
      * 分页查询
      */
